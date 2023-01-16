@@ -35,27 +35,27 @@ fn main() -> io::Result<()> {
         REG_OPENED_EXISTING_KEY => println!("An existing key has been opened"),
     }
 
-    key.set_value("TestSZ", &"written by Rust")?;
-    let sz_val: String = key.get_value("TestSZ")?;
-    key.delete_value("TestSZ")?;
+    // key.set_value("TestSZ", &"written by Rust")?;
+    let sz_val: String = key.get_value("KEYGEN_ACCOUNT_ID")?;
+    // key.delete_value("TestSZ")?;
     println!("TestSZ = {}", sz_val);
 
-    key.set_value("TestDWORD", &1234567890u32)?;
-    let dword_val: u32 = key.get_value("TestDWORD")?;
-    println!("TestDWORD = {}", dword_val);
+    // key.set_value("TestDWORD", &1234567890u32)?;
+    // let dword_val: u32 = key.get_value("TestDWORD")?;
+    // println!("TestDWORD = {}", dword_val);
 
-    key.set_value("TestQWORD", &1234567891011121314u64)?;
-    let qword_val: u64 = key.get_value("TestQWORD")?;
-    println!("TestQWORD = {}", qword_val);
+    // key.set_value("TestQWORD", &1234567891011121314u64)?;
+    // let qword_val: u64 = key.get_value("TestQWORD")?;
+    // println!("TestQWORD = {}", qword_val);
 
-    key.create_subkey("sub\\key")?;
-    hkcu.delete_subkey_all(&path)?;
+    // key.create_subkey("sub\\key")?;
+    // hkcu.delete_subkey_all(&path)?;
 
-    println!("Trying to open nonexistent key...");
-    hkcu.open_subkey(&path).unwrap_or_else(|e| match e.kind() {
-        io::ErrorKind::NotFound => panic!("Key doesn't exist"),
-        io::ErrorKind::PermissionDenied => panic!("Access denied"),
-        _ => panic!("{:?}", e),
-    });
+    // println!("Trying to open nonexistent key...");
+    // hkcu.open_subkey(&path).unwrap_or_else(|e| match e.kind() {
+    //     io::ErrorKind::NotFound => panic!("Key doesn't exist"),
+    //     io::ErrorKind::PermissionDenied => panic!("Access denied"),
+    //     _ => panic!("{:?}", e),
+    // });
     Ok(())
 }
