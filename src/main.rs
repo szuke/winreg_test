@@ -1,4 +1,5 @@
 extern crate winreg;
+use std::fs;
 use std::io;
 use std::path::Path;
 use winreg::enums::*;
@@ -18,6 +19,9 @@ fn main() -> io::Result<()> {
         "last_write_time as winapi::um::minwinbase::SYSTEMTIME = {}-{:02}-{:02} {:02}:{:02}:{:02}",
         mt.wYear, mt.wMonth, mt.wDay, mt.wHour, mt.wMinute, mt.wSecond
     );
+
+    let lastorder = fs::read_to_string("lastread.txt")?;
+    println!("lastorder = {}", lastorder);
 
     // enable `chrono` feature on `winreg` to make this work
     // println!(
@@ -39,6 +43,8 @@ fn main() -> io::Result<()> {
     let sz_val: String = key.get_value("KEYGEN_ACCOUNT_ID")?;
     // key.delete_value("TestSZ")?;
     println!("TestSZ = {}", sz_val);
+
+    fs::write("lastread.txt", sz_val.to_string())?;
 
     // key.set_value("TestDWORD", &1234567890u32)?;
     // let dword_val: u32 = key.get_value("TestDWORD")?;
